@@ -1,0 +1,39 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: LinuxAgentPool
+  demands:
+    - JDK -equals 11
+    - Terraform -equals Yes
+variables:
+  isMaster: $[eq(variables['Build.sourceBranch'], 'refs/heads/master')]
+stages:
+  - stage: CheckingTheAgent
+    condition: and(succeeded(), eq(variables.isMaster, true))
+    pool:
+      name: LinuxAgentPool
+      demands:
+       - Terraform -equals Yes
+    variables:
+      stage_version: '2.0.0'
+      stage_email: 'sraghu486@gmail.com'
+    jobs:
+      - job: CheckingTerraformPackerAndansibleTrivy
+        variables:
+          job_version: "3.0.0"
+          job_email: 'sraghu486@gmail.com'
+        timeoutInMinutes: 5
+        steps:
+          - script: echo $(Build.BuildId)
+            displayName: "Display The Build-ID"
+          - script: terraform version && packer version && ansible --version && trivy --version
+            displayName: 'Display Terraform & Packer version'
+          - script: docker version && docker ps && docker images && docker ps -a
+            displayName: 'Display Docker Version'
+          - script: pwd && ls -al
