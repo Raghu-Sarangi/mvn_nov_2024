@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  - master
 
 pool:
   name: LinuxAgentPool
@@ -19,21 +19,59 @@ stages:
     pool:
       name: LinuxAgentPool
       demands:
-       - Terraform -equals Yes
+        - Terraform -equals Yes
     variables:
-      stage_version: '2.0.0'
-      stage_email: 'sraghu486@gmail.com'
+      stage_version: "2.0.0"
+      stage_email: "sraghu486@gmail.com"
     jobs:
       - job: CheckingTerraformPackerAndansibleTrivy
         variables:
           job_version: "3.0.0"
-          job_email: 'sraghu486@gmail.com'
+          job_email: "sraghu486@gmail.com"
         timeoutInMinutes: 5
         steps:
           - script: echo $(Build.BuildId)
             displayName: "Display The Build-ID"
           - script: terraform version && packer version && ansible --version && trivy --version
-            displayName: 'Display Terraform & Packer version'
+            displayName: "Display Terraform & Packer version"
           - script: docker version && docker ps && docker images && docker ps -a
-            displayName: 'Display Docker Version'
+            displayName: "Display Docker Version"
           - script: pwd && ls -al
+            displayName: "Display List & Folders"
+  - stage: SASTWithSonarQube
+    condition: and(succeeded(), eq(variables.isDev, true))
+    pool:
+      name: LinuxAgentPool
+      demands:
+        - JDK -equals 11
+    jobs:
+      - job: RunningSASTWithSonarqube
+        timeoutInMinutes: 10
+        steps:
+          #SonarQube User Token need to be generated and used in the ServiceConnection.
+          #Also change name of the project and artifactId(line 6 & 14) to ado-spring-boot-app-dev in POM.
+          #No need to create a project in sonarqube as its created automatically.
+          - script: export SONAR_TOKEN=3efbda291a94b3d25e4e6fc1db05561f538850f3
+          - task: SonarQubePrepare@5
+            inputs:
+              SonarQube: "SONAR_TOKEN"
+              scannerMode: "Other"
+              #projectKey: 'sqp_63da7bac31bd4496f2ee1170156659ea8c782c28'-NotNeeded
+              #projectName: 'ado-spring-boot-app-dev'-NotNeeded
+              projectVersion: "$(Build.BuildId)"
+            displayName: "Preparing SonarQube Config"
+          - task: Maven@4
+            inputs:
+              mavenPomFile: "pom.xml"
+              publishJUnitResults: false
+              javaHomeOption: "JDKVersion"
+              mavenVersionOption: "Default"
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: true
+              sqMavenPluginVersionChoice: "latest"
+            displayName: "Running SonarQube Maven Analysis"
+          - task: sonar-buildbreaker@8
+            inputs:
+              SonarQube: "SONAR_TOKEN"
+            displayName: "SAST Job Fail or Pass"
