@@ -52,6 +52,7 @@ stages:
           #Also change name of the project and artifactId(line 6 & 14) to ado-spring-boot-app-dev in POM.
           #No need to create a project in sonarqube as its created automatically.
           - script: export SONAR_TOKEN=3efbda291a94b3d25e4e6fc1db05561f538850f3
+          - script: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=myapp-cic_myapp-cicd
           - task: SonarQubePrepare@5
             inputs:
               SonarQube: "SONAR_TOKEN"
