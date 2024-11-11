@@ -39,7 +39,7 @@ stages:
           - script: pwd && ls -al
             displayName: "Display List & Folders"
   - stage: SASTWithSonarQube
-    condition: and(succeeded(), eq(variables.isMaster, true))
+    condition: and(succeeded(), eq(variables.isDev, true))
     pool:
       name: LinuxAgentPool
       demands:
@@ -51,11 +51,9 @@ stages:
           #SonarQube User Token need to be generated and used in the ServiceConnection.
           #Also change name of the project and artifactId(line 6 & 14) to ado-spring-boot-app-dev in POM.
           #No need to create a project in sonarqube as its created automatically.
-          - script: export SONAR_TOKEN=3efbda291a94b3d25e4e6fc1db05561f538850f3
-          - script: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=myapp-cic_myapp-cicd
           - task: SonarQubePrepare@5
             inputs:
-              SonarQube: "SONAR_TOKEN"
+              SonarQube: "devopsb32-sonarqube-token"
               scannerMode: "Other"
               #projectKey: 'sqp_63da7bac31bd4496f2ee1170156659ea8c782c28'-NotNeeded
               #projectName: 'ado-spring-boot-app-dev'-NotNeeded
@@ -74,5 +72,5 @@ stages:
             displayName: "Running SonarQube Maven Analysis"
           - task: sonar-buildbreaker@8
             inputs:
-              SonarQube: "SONAR_TOKEN"
+              SonarQube: "devopsb32-sonarqube-token"
             displayName: "SAST Job Fail or Pass"
