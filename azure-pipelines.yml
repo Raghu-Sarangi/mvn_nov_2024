@@ -57,7 +57,7 @@ stages:
             inputs:
               SonarQube: "devopsb32_sonarqube-token"
               scannerMode: "Other"
-              projectKey: "sqp_e82255b10382267b0749458c24e460ecaf0de706"
+              projectKey: "e82255b10382267b0749458c24e460ecaf0de706"
               projectName: "devopsb32_sonarqube-token"
               projectVersion: "$(Build.BuildId)"
             displayName: "Preparing SonarQube Config"
