@@ -51,7 +51,8 @@ stages:
           #SonarQube User Token need to be generated and used in the ServiceConnection.
           #Also change name of the project and artifactId(line 6 & 14) to ado-spring-boot-app-dev in POM.
           #No need to create a project in sonarqube as its created automatically.
-          - script: export SONAR_TOKEN=039932b5d81d46015a8d647730db7081a050da06
+          - script: export SONAR_TOKEN='039932b5d81d46015a8d647730db7081a050da06'
+          - script: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsb32-sonarqube-token
           - task: SonarQubePrepare@5
             inputs:
               SonarQube: "devopsb32-sonarqube-token"
