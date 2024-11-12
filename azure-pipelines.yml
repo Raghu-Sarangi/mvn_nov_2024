@@ -73,6 +73,7 @@ stages:
               sonarQubeRunAnalysis: true
               sqMavenPluginVersionChoice: "latest"
             displayName: "Running SonarQube Maven Analysis"
+          - script: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsb32_sonarqube-token
           - task: sonar-buildbreaker@8
             inputs:
               SonarQube: "devopsb32_sonarqube-token"
