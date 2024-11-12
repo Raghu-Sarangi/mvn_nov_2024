@@ -57,8 +57,8 @@ stages:
             inputs:
               SonarQube: "devopsb32_sonarqube-token"
               scannerMode: "Other"
-              projectKey: "e82255b10382267b0749458c24e460ecaf0de706"
-              projectName: "devopsb32_sonarqube-token"
+              projectKey: "c6ecc3a736d2d4bf6d01437523cf442246e62bbc"
+              projectName: "devopsb32_sonarqube"
               projectVersion: "$(Build.BuildId)"
             displayName: "Preparing SonarQube Config"
           - task: Maven@4
