@@ -58,7 +58,7 @@ stages:
               SonarQube: "devopsb32_sonarqube-token"
               scannerMode: "Other"
               projectKey: "c6ecc3a736d2d4bf6d01437523cf442246e62bbc"
-              projectName: "devopsb32_sonarqube"
+              projectName: "petclinic"
               projectVersion: "$(Build.BuildId)"
             displayName: "Preparing SonarQube Config"
           - task: Maven@4
