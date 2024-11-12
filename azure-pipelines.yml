@@ -54,7 +54,7 @@ stages:
           - script: export SONAR_TOKEN=0b7a2f7aba5c470f0e327dbb96104193a22213f2
           - task: SonarQubePrepare@5
             inputs:
-              SonarQube: "devopsb32-sonarqube-token"
+              SonarQube: "devopsb32_sonarqube-token"
               scannerMode: "Other"
               #projectKey: 'sqp_63da7bac31bd4496f2ee1170156659ea8c782c28'-NotNeeded
               #projectName: 'ado-spring-boot-app-dev'-NotNeeded
@@ -73,5 +73,5 @@ stages:
             displayName: "Running SonarQube Maven Analysis"
           - task: sonar-buildbreaker@8
             inputs:
-              SonarQube: "devopsb32-sonarqube-token"
+              SonarQube: "devopsb32_sonarqube-token"
             displayName: "SAST Job Fail or Pass"
