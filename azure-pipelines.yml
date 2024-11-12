@@ -44,6 +44,8 @@ stages:
       name: LinuxAgentPool
       demands:
         - JDK -equals 11
+    variables:
+      SONAR_TOKEN: "0b7a2f7aba5c470f0e327dbb96104193a22213f2"
     jobs:
       - job: RunningSASTWithSonarqube
         timeoutInMinutes: 10
