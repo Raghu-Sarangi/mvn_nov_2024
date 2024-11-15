@@ -39,7 +39,7 @@ stages:
           - script: pwd && ls -al
             displayName: "Display List & Folders"
   - stage: SASTWithSonarQube
-    condition: and(succeeded(), eq(variables.isDev, true))
+    condition: and(succeeded(), eq(variables.isMaster, true))
     pool:
       name: LinuxAgentPool
       demands:
