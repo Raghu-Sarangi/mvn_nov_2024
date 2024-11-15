@@ -88,9 +88,9 @@ stages:
         steps:
           - script: ls -al && pwd && rm -rf /home/ubuntu/.m2/settings.xml
             displayName: "List Files & Current Working Directory"
-          - task: DownloadSecureFile@1
-            inputs:
-              secureFile: "settings.xml"
+          # - task: DownloadSecureFile@1
+          #   inputs:
+          #     secureFile: "settings.xml"
           - task: CopyFiles@2
             inputs:
               SourceFolder: "$(Agent.TempDirectory)"
