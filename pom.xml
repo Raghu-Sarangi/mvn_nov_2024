@@ -8,9 +8,9 @@
 		<version>3.2.11</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-  <groupId>org.springframework.samples</groupId>
+  <!-- <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version> -->
   <name>petclinic</name>
   <description>Demo project for Spring Boot</description>
 	<url/>
@@ -274,12 +274,12 @@
     </plugins>
   </build>
 
-  <!-- <licenses>
+  <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
-  </licenses> -->
+  </licenses>
 
   <repositories>
     <repository>
