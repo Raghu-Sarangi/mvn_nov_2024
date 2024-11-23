@@ -32,17 +32,17 @@
 
   <distributionManagement>
     <repository>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>http://ec2-44-208-31-248.compute-1.amazonaws.com:8081/artifactory/libs-release-local</url>
+        <id>central</id>
+        <name>libs-release</name>
+        <url>http://jfrog.raghu.shop:8081/artifactory/libs-release-local</url>
     </repository>
 
     <snapshotRepository>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>http://ec2-44-208-31-248.compute-1.amazonaws.com:8081/artifactory/libs-snapshot-local</url>
+        <id>snapshots</id>
+        <name>libs-snapshot</name>
+        <url>http://jfrog.raghu.shop:8081/artifactory/libs-snapshot-local</url>
     </snapshotRepository>
-  </distributionManagement>
+ </distributionManagement>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->

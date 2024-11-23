@@ -34,7 +34,7 @@
       <pluginRepositories>
         <pluginRepository>
           <snapshots>
-            <enabled>true</enabled>
+            <enabled>false</enabled>
           </snapshots>
           <id>central</id>
           <name>libs-release</name>
